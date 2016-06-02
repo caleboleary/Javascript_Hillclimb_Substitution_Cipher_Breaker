@@ -1,11 +1,11 @@
 
 # Hillclimbing/Genetic Mutating Function Demo & Tutorial
 
-	Today I'll be walking you through a programming techinque called 'hillclimbing', and how we can use it with genetic mutating functions to solve problems that seem like they'd take a huge amount of time, or a real human to break.
+Today I'll be walking you through a programming techinque called 'hillclimbing', and how we can use it with genetic mutating functions to solve problems that seem like they'd take a huge amount of time, or a real human to break.
 
-	Hillclimbing at it's core is meant to find something called the 'local maxima'. Imagine a chart with several peaks and valleys, one way to find the highest peak would be to pick a random position and start going up. You may end up at a peak that isn't the highest, but chances are, if you did this enough times you'd find the tallest peak. The below code repeats this process 100 times and returns the highest peak it found.
+Hillclimbing at it's core is meant to find something called the 'local maxima'. Imagine a chart with several peaks and valleys, one way to find the highest peak would be to pick a random position and start going up. You may end up at a peak that isn't the highest, but chances are, if you did this enough times you'd find the tallest peak. The below code repeats this process 100 times and returns the highest peak it found.
 
-	Here's a quick example in JavaScript showing something like what I described:
+Here's a quick example in JavaScript showing something like what I described:
 
 ```sh
 var dataSet = [3,15,25,67,68,54,32,12,56,69,70,57,43,32,12,34,54,25,10,3];
@@ -33,33 +33,33 @@ console.log(peaks.sort()[peaks.length-1]);
 
 Now we know this isn't the best way to find the highest point, but bear with me, because there are instances where this strategy does come in handy.
 
-	So when is this random searching useful? Enter the Substitution Cipher. Using the english alphabet, 
-	messages can be encoded with up to 400 septillion (after trillion, quadrillion, quintillion, and sextillion -- this number: 403291461126605635584000000) different keys.
+So when is this random searching useful? Enter the Substitution Cipher. Using the english alphabet, 
+messages can be encoded with up to 400 septillion (after trillion, quadrillion, quintillion, and sextillion -- this number: 403291461126605635584000000) different keys.
 
-	Say we have the following message, pulled from Simon Singh's 'The Code Book' (excellent read) which is encoded with a random
-	substitution cipher. Every letter has been replaced by one letter throughout the whole test, for example we've replaced
-	every 'a' with 'x', every 'b' with 'd' or something like that, no rhyme or reason, and not in alphabetical order (that would be a Caesar Cipher, much easier to break).
+Say we have the following message, pulled from Simon Singh's 'The Code Book' (excellent read) which is encoded with a random
+substitution cipher. Every letter has been replaced by one letter throughout the whole test, for example we've replaced
+every 'a' with 'x', every 'b' with 'd' or something like that, no rhyme or reason, and not in alphabetical order (that would be a Caesar Cipher, much easier to break).
 
-	BT JPX RMLX PCUV AMLX ICVJP IBTWXVR CI M LMT’R PMTN, MTN YVCJX CDXV MWMBTRJ JPX AMTNGXRJBAH UQCT JPX QGMRJXV CI JPX 
-	YMGG CI JPX HBTW’R QMGMAX; MTN JPX HBTW RMY JPX QMVJ CI JPX PMTN JPMJ YVCJX. JPXT JPX HBTW’R ACUTJXTMTAX YMR APMTWXN, 
-	MTN PBR JPCUWPJR JVCUFGXN PBL, RC JPMJ JPX SCBTJR CI PBR GCBTR YXVX GCCRXN, MTN PBR HTXXR RLCJX CTX MWMBTRJ MTCJPXV. 
-	JPX HBTW AVBXN MGCUN JC FVBTW BT JPX MRJVCGCWXVR, JPX APMGNXMTR, MTN JPX RCCJPRMEXVR. MTN JPX HBTW RQMHX, MTN RMBN JC 
-	JPX YBRX LXT CI FMFEGCT, YPCRCXDXV RPMGG VXMN JPBR YVBJBTW, MTN RPCY LX JPX BTJXVQVXJMJBCT JPXVXCI, RPMGG FX AGCJPXN YBJP RAM
+BT JPX RMLX PCUV AMLX ICVJP IBTWXVR CI M LMT’R PMTN, MTN YVCJX CDXV MWMBTRJ JPX AMTNGXRJBAH UQCT JPX QGMRJXV CI JPX 
+YMGG CI JPX HBTW’R QMGMAX; MTN JPX HBTW RMY JPX QMVJ CI JPX PMTN JPMJ YVCJX. JPXT JPX HBTW’R ACUTJXTMTAX YMR APMTWXN, 
+MTN PBR JPCUWPJR JVCUFGXN PBL, RC JPMJ JPX SCBTJR CI PBR GCBTR YXVX GCCRXN, MTN PBR HTXXR RLCJX CTX MWMBTRJ MTCJPXV. 
+JPX HBTW AVBXN MGCUN JC FVBTW BT JPX MRJVCGCWXVR, JPX APMGNXMTR, MTN JPX RCCJPRMEXVR. MTN JPX HBTW RQMHX, MTN RMBN JC 
+JPX YBRX LXT CI FMFEGCT, YPCRCXDXV RPMGG VXMN JPBR YVBJBTW, MTN RPCY LX JPX BTJXVQVXJMJBCT JPXVXCI, RPMGG FX AGCJPXN YBJP RAM
 
-	Now, there are definitely techniques out there to solve this by hand, but how could we apply a shotgun hillclimb approach here, and solve this with a computer so we don't have to think? (Shotgun hillclimb is the type of hillclimbing where we don't just find 1 local maxima, but many at random intervals and take the best, like doing that hillclimb above 100 times.) A total random search would involve us testing 400 septillion keys, which seems a sight impractical.
+Now, there are definitely techniques out there to solve this by hand, but how could we apply a shotgun hillclimb approach here, and solve this with a computer so we don't have to think? (Shotgun hillclimb is the type of hillclimbing where we don't just find 1 local maxima, but many at random intervals and take the best, like doing that hillclimb above 100 times.) A total random search would involve us testing 400 septillion keys, which seems a sight impractical.
 
-	We'll need a few things set up before our computers can crack this code unaided, let's check out the recipe:
+We'll need a few things set up before our computers can crack this code unaided, let's check out the recipe:
 	
-		--Decoding function - we need a function that decodes this message for a given key. We can try many keys, and evaluate the deciphered message to see if it's legible.
-		--Dictionary - we need a way to decide if our random key resulted in any non-gibberish, let's do the top 1000 english words. (Or whatever language we're cracking).
-		--Scoring function - use our dictionary to give us a 'score' for how well the key does.
-		--Generator function - something to generate random keys for us to score.
-		--Mutator function - take a good key in, and return a lot of slightly altered ones to test. Hopefully this will result in us moving closer to the real key.
-		--Starting Point Function - A good place to start looking, lets make a key that would be right if the message had the exact letter distribution as normal English. This will be a great place to mutate from.
-		--Controller - a function to generate keys, test them all, pick the best using the scores, and mutate/generate more for testing
+	--Decoding function - we need a function that decodes this message for a given key. We can try many keys, and evaluate the deciphered message to see if it's legible.
+	--Dictionary - we need a way to decide if our random key resulted in any non-gibberish, let's do the top 1000 english words. (Or whatever language we're cracking).
+	--Scoring function - use our dictionary to give us a 'score' for how well the key does.
+	--Generator function - something to generate random keys for us to score.
+	--Mutator function - take a good key in, and return a lot of slightly altered ones to test. Hopefully this will result in us moving closer to the real key.
+	--Starting Point Function - A good place to start looking, lets make a key that would be right if the message had the exact letter distribution as normal English. This will be a great place to mutate from.
+	--Controller - a function to generate keys, test them all, pick the best using the scores, and mutate/generate more for testing
 
 
-	Let's see the pieces:
+Let's see the pieces:
 
 ###Decoding Function
 	```sh
@@ -76,7 +76,7 @@ Now we know this isn't the best way to find the highest point, but bear with me,
 }
 	
 	```
-	This function takes in a string and a key, and shifts each letter as if it were a subsitution cipher, and the key the correct key, returning the deciphered string.
+This function takes in a string and a key, and shifts each letter as if it were a subsitution cipher, and the key the correct key, returning the deciphered string.
 
 
 ###Dictionary
@@ -85,7 +85,7 @@ Now we know this isn't the best way to find the highest point, but bear with me,
 
 	
 	```
-	An array of the top 1000 most used English words.
+An array of the top 1000 most used English words.
 
 
 ###Scoring Function
@@ -111,7 +111,7 @@ Now we know this isn't the best way to find the highest point, but bear with me,
 }
 	
 	```
-	This function takes in the string you're trying to crack, and an array of possible keys, each needing scoring. It returns the best fit candidate (most real English words matched) and it's score.
+This function takes in the string you're trying to crack, and an array of possible keys, each needing scoring. It returns the best fit candidate (most real English words matched) and it's score.
 
 
 ###Generator Function
@@ -131,7 +131,7 @@ function shuffle() {
 }
 	
 	```
-	This function creates a new shuffled version of the English alphabet and returns it.
+This function creates a new shuffled version of the English alphabet and returns it.
 
 
 ###Mutator Function
@@ -149,7 +149,7 @@ function shuffle() {
 }
 	
 	```
-	This duplicates the passed in array (to avoid editing the original by reference) and swaps 2 random array values *amount* times. This gives us control to mutate the alphabet as drasticly as we wish, if we're barking up the wrong figurative tree we can start trying more extreme variants.
+This duplicates the passed in array (to avoid editing the original by reference) and swaps 2 random array values *amount* times. This gives us control to mutate the alphabet as drasticly as we wish, if we're barking up the wrong figurative tree we can start trying more extreme variants.
 
 
 ###Starting Point Functions
@@ -202,7 +202,7 @@ function orderFrequency(str){
 }
 	
 	```
-	Technically this piece isn't needed, but it makes the process much more efficient. Rather than starting with random keys, we use the known average character frequency to give ourselves a nice starting place to begin mutating. This function essentially creates a key that would be correct if the character frequency of the string to crack exactly matched up with English as a whole.
+Technically this piece isn't needed, but it makes the process much more efficient. Rather than starting with random keys, we use the known average character frequency to give ourselves a nice starting place to begin mutating. This function essentially creates a key that would be correct if the character frequency of the string to crack exactly matched up with English as a whole.
 
 
 ###Controller
@@ -232,7 +232,7 @@ function orderFrequency(str){
 }
 	
 	```
-	The controller makes use of the rest of the pieces we just defined, you pass in the string you want to crack and the number of 'turns' you want to allow the program to run. First it defines some variables and generates an array of 20 random alphabets, and scores them all. It then runs a loop *attempts* times and continuously mutates the best key it's found. Over hundreds or thousands of repetitions, this slowly can actually find the correct key for a cipher.
+The controller makes use of the rest of the pieces we just defined, you pass in the string you want to crack and the number of 'turns' you want to allow the program to run. First it defines some variables and generates an array of 20 random alphabets, and scores them all. It then runs a loop *attempts* times and continuously mutates the best key it's found. Over hundreds or thousands of repetitions, this slowly can actually find the correct key for a cipher.
 
 
 ###Go time!
@@ -244,6 +244,6 @@ var crack = 'BT JPX RMLX PCUV AMLX ICVJP IBTWXVR CI M LMT’R PMTN, MTN YVCJX CD
 console.log(deSubstitute(crack,crackSubstitution(crack, 2000)));
 	
 	```
-	Here's how you can run all that code! I suggest running it with Node, but it will run in the browser (if slowly). 
+Here's how you can run all that code! I suggest running it with Node, but it will run in the browser (if slowly). 
 
 
