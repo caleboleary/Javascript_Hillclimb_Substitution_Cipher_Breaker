@@ -1,5 +1,5 @@
-
 # Hillclimbing/Genetic Mutating Function Demo & Tutorial
+
 
 Today I'll be walking you through a programming techinque called 'hillclimbing', and how we can use it with genetic mutating functions to solve problems that seem like they'd take a huge amount of time, or a real human to break.
 
@@ -52,7 +52,6 @@ We'll need a few things set up before our computers can crack this code unaided,
 	--Decoding function - we need a function that decodes this message for a given key. We can try many keys, and evaluate the deciphered message to see if it's legible.
 	--Dictionary - we need a way to decide if our random key resulted in any non-gibberish, let's do the top 1000 english words. (Or whatever language we're cracking).
 	--Scoring function - use our dictionary to give us a 'score' for how well the key does.
-	--Generator function - something to generate random keys for us to score.
 	--Mutator function - take a good key in, and return a lot of slightly altered ones to test. Hopefully this will result in us moving closer to the real key.
 	--Starting Point Function - A good place to start looking, lets make a key that would be right if the message had the exact letter distribution as normal English. This will be a great place to mutate from.
 	--Controller - a function to generate keys, test them all, pick the best using the scores, and mutate/generate more for testing
@@ -107,25 +106,6 @@ function score(str, keyArr) {
 }	
 ```
 This function takes in the string you're trying to crack, and an array of possible keys, each needing scoring. It returns the best fit candidate (most real English words matched) and it's score.
-
-
-###Generator Function
-```sh
-//base code from http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-function shuffle() {
-	var newArr= ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-	var currentIndex = newArr.length, temporaryValue, randomIndex;
-	while (0 !== currentIndex) {
-		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
-		temporaryValue = newArr[currentIndex];
-		newArr[currentIndex] = newArr[randomIndex];
-		newArr[randomIndex] = temporaryValue;
-  }
-  return newArr;
-}	
-```
-This function creates a new shuffled version of the English alphabet and returns it.
 
 
 ###Mutator Function
@@ -223,7 +203,7 @@ function crackSubstitution (str, attempts) {
 	return runningWinner;
 }	
 ```
-The controller makes use of the rest of the pieces we just defined, you pass in the string you want to crack and the number of 'turns' you want to allow the program to run. First it defines some variables and generates an array of 20 random alphabets, and scores them all. It then runs a loop *attempts* times and continuously mutates the best key it's found. Over hundreds or thousands of repetitions, this slowly can actually find the correct key for a cipher.
+The controller makes use of the rest of the pieces we just defined, you pass in the string you want to crack and the number of 'turns' you want to allow the program to run. First it defines some variables and starts the mutation process with the perfect character frequency version from the starting point function. It then runs a loop *attempts* times and continuously mutates the best key it's found. Over hundreds or thousands of repetitions, this slowly can actually find the correct key for a cipher, and in the scope of things much quicker than searching 400 septillion variations!
 
 
 ###Go time!
@@ -235,5 +215,6 @@ var crack = 'BT JPX RMLX PCUV AMLX ICVJP IBTWXVR CI M LMT’R PMTN, MTN YVCJX CD
 console.log(deSubstitute(crack,crackSubstitution(crack, 2000)));
 ```
 Here's how you can run all that code! I suggest running it with Node, but it will run in the browser (if slowly). 
+
 
 
